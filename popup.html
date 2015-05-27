@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Chromium Updater</title><link rel="stylesheet" href="popup.css" type="text/css" /><style type="text/css">body {width:340px;}</style><script type="text/javascript" src="popup.js"></script></head>
+<body>
+    <div id="box1">
+      <div><form id="form" name="form" method="post" action="">
+        <div align="right">
+          <input type="submit" name="button2" id="downloadBtn" value="Download and update!" disabled="disabled"/>
+        </div>
+      </form></div>
+      <div class="Uv uY a-f-e Qea"><img src="Banner.png" width="146" height="32" /></div>
+      <div class="spacer"></div>
+      <div class="wrap"><div class="label">Installed Version: &nbsp;</div><div class="versionLabel" id="installed_label"></div></div>
+      <div class="wrap"><div class="label">Latest FreeSMUG Build: &nbsp;</div><div class="versionLabel" id="freesmug_label"></div></div>
+      <div class="spacer"></div>
+      <div class="wrap"><div class="label" id="stable_desc">Latest Chromium Stable: &nbsp;<br><div id="omahaproxy">(see <a id="releaseCalendar" href="#">Release Calendar</a>)</div></div><div class="versionLabel" id="stable_label"></div></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="versionLabel" id="updateMsg"></div>
+      <div class="spacer"></div>
+    </div>
+    <div id="box2"> </div>
+</body></html>

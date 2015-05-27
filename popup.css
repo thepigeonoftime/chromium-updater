@@ -1,0 +1,161 @@
+body{background:-webkit-gradient(linear,left bottom,left top,from(#eee),to(#fff)) no-repeat fixed right bottom;font-family:"メイリオ","Meiryo",verdana,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;font-size:12px;line-height:150%;}
+#main{
+	margin-top:auto;
+	margin-right:auto;
+	margin-bottom:auto;
+	margin-left:auto;
+	padding-top:10px;
+	padding-right:10px;
+	padding-bottom:10px;
+	padding-left:15px;
+	-moz-box-shadow:0 0 10px #000;
+	-webkit-box-shadow:0 0 10px #000;
+	border-bottom-left-radius:12px 12px;
+	border-bottom-right-radius:12px 12px;
+	border-top-left-radius:12px 12px;
+	border-top-right-radius:12px 12px;
+}
+#box2{display:none;}
+
+.container{
+	text-align:left;
+	width:350px;
+	margin:auto;
+}
+
+.list{width:146px;border:2px solid #666;height:150px;}
+.tbig{font-size:20px;color:#333;}
+#file_name{width:590px;height:25px;font-size:20px;border:2px solid #666;border-bottom-left-radius:5px 5px;border-bottom-right-radius:5px 5px;border-top-left-radius:5px 5px;border-top-right-radius:5px 5px;}
+#save{width:395px;height:50px;border-bottom-left-radius:15px 15px;border-bottom-right-radius:15px 15px;border-top-left-radius:15px 15px;border-top-right-radius:15px 15px;-moz-box-shadow:0 0 5px #000;-webkit-box-shadow:0 0 5px #000;border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;background:-webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#eee)) 0 50%;}
+#reset{
+	margin-left:5px;
+	width:120px;
+	height:50px;
+	border-bottom-left-radius:15px 15px;
+	border-bottom-right-radius:15px 15px;
+	border-top-left-radius:15px 15px;
+	border-top-right-radius:15px 15px;
+	-moz-box-shadow:0 0 5px #000;
+	-webkit-box-shadow:0 0 5px #000;
+	border-top-style:solid;
+	border-right-style:solid;
+	border-bottom-style:solid;
+	border-left-style:solid;
+	background:-webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#eee)) 0 50%;
+}
+#editout{margin-left:5px;width:600px;height:50px;border-bottom-left-radius:15px 15px;border-bottom-right-radius:15px 15px;border-top-left-radius:15px 15px;border-top-right-radius:15px 15px;-moz-box-shadow:0 0 5px #000;-webkit-box-shadow:0 0 5px #000;border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;background:-webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#eee)) 0 50%;}
+#reset:hover,#save:hover,#editout:hover{//-moz-box-shadow:0 0 5px #5391f2;//-webkit-box-shadow:0 0 5px #5391f2;background:-webkit-gradient(linear,0% 0,0% 100%,from(#eee),to(#fff)) 0 50%;}
+#credit{width:110px;height:50px;vertical-align:bottom;}
+#sample{
+	background-color:#C0D6F8;
+	height:18px;
+	border-bottom-left-radius:5px 5px;
+	border-bottom-right-radius:5px 5px;
+	border-top-left-radius:5px 5px;
+	border-top-right-radius:5px 5px;
+}
+
+.select_back{padding:0;padding-left:3px;font-size:12px;cursor:default;height:18px;}
+.select_back:hover{background-color:#39f;color:#fff;}
+.select_container{width:141px;border:2px solid #666;height:150px;display:block;float:left;margin-right:5px;cursor:default;border-bottom-left-radius:5px 5px;border-bottom-right-radius:5px 5px;border-top-left-radius:5px 5px;border-top-right-radius:5px 5px;-webkit-user-select:none;}
+.clear{clear:left;}
+.select_label{padding:1px;padding-left:3px;font-size:12px;cursor:default;border-bottom-left-radius:5px 5px;border-bottom-right-radius:5px 5px;border-top-left-radius:5px 5px;border-top-right-radius:5px 5px;}
+#star{border-bottom-left-radius:5px 5px;border-bottom-right-radius:5px 5px;border-top-left-radius:5px 5px;border-top-right-radius:5px 5px;}
+.select_back_txt:hover,
+.select_label:hover,#star:hover,#file_name:hover,
+.select_container:hover,#imgdata:hover{-moz-box-shadow:0 0 5px #5391f2;-webkit-box-shadow:0 0 5px #5391f2;}
+.select_txt{width:60px;height:12px;font-size:10px;vertical-align:middle;margin:0;padding:0;margin-left:3px;border:1px solid #666;}
+.select_back_txt{padding:0;padding-left:3px;font-size:12px;cursor:default;height:18px;}
+#version{font-size:12px;position:relative;left:550px;top:-10px;text-align:left;text-shadow:0 0 3px #333;}
+#imgdata{width:590px;padding:2px;margin:5px;margin-bottom:15px;font-size:12px;border:2px solid #666;border-bottom-left-radius:5px 5px;border-bottom-right-radius:5px 5px;border-top-left-radius:5px 5px;border-top-right-radius:5px 5px;}
+.link_label{cursor:default;margin:5px;padding:3px;padding-left:10px;padding-right:10px;border-bottom-left-radius:5px 5px;border-bottom-right-radius:5px 5px;border-top-left-radius:5px 5px;border-top-right-radius:5px 5px;//-moz-box-shadow:0 0 5px #000;//-webkit-box-shadow:0 0 5px #000;background:-webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#eee)) 0 50%;border:1px solid #666;}
+.link_label:hover{background:-webkit-gradient(linear,0% 0,0% 100%,from(#eee),to(#fff)) 0 50%;}
+.ch_list{float:left;width:280px;margin-left:15px;}
+.option_list{border:2px solid #ccc;border-bottom-left-radius:5px 5px;border-bottom-right-radius:5px 5px;border-top-left-radius:5px 5px;border-top-right-radius:5px 5px;height:120px;width:590px;}
+
+.container #main #box1 
+.tbig h2 strong {
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+}
+
+.rankTD {
+width: 28px;
+color: #2E8000;
+}
+
+.avatarTD {
+height: 32px;
+width: 35px;
+}
+
+.nameTD {
+width: 80px;
+color: rgba(48, 188, 216, 1);
+}
+
+.relevanceTD {
+width: 126px;
+color: #F80B0B;
+}
+
+.uidTD {
+width: 160px;
+}
+
+.umailTD {
+width: 165px;
+}
+
+#updateMsg {
+	/*margin-left:30px;*/
+}
+
+#stable_desc {
+	color:#CCC !important;
+	text-decoration:none;
+}
+
+.spacer {
+	width:100%;
+	min-height:10px;
+	display:block;
+}
+
+.wrap {
+	width:80%;
+	display:table;
+	/*margin:0 auto;*/
+	padding:5px;
+	position:relative;
+}
+
+.label{
+	float:left;
+	font-size:10px;
+	height:12px;
+	color:#666;
+	width:150px;
+}
+
+.versionLabel{
+	float:right;
+	font-size:10px;
+	height:12px;
+	color:#666;
+}
+
+#stable_label {
+	color:#CCC !important;
+}
+
+#omahaproxy, #omahaproxy a, #omahaproxy a:active, #omahaproxy a:visited{
+	font-size:7pt;
+	text-decoration: none;
+	outline: 0;
+}
+#omahaproxy a {
+	color:#888;
+}
+#omahaproxy a:hover {
+	text-decoration: underline;
+}

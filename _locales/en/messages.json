@@ -1,0 +1,8 @@
+{
+   "Desc": {
+      "message": "Check for, download and install the latest FreeSMUG Chromium revisions"
+   },
+   "Name": {
+      "message": "FreeSMUG Chromium Updater"
+   }
+}
