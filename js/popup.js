@@ -1,81 +1,77 @@
-﻿/*
+/*
 Extension: FreeSMUG Chromium Updater
 Description: Check for, download and install the latest FreeSMUG Chromium revisions
 Author: Anatol Liebermann
 Version: 0.1
 */
 
+var $ = document.getElementById.bind(document);
+var bg = chrome.extension.getBackgroundPage();
+var latestStable, latestFreesmug, downloadURL = false;
+var updateStartup, updateHourly, officialStable, stableMismatch;
+var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
+// Test Value
+currentVer = "42.0.2357.81";
 
-// Init
-var xid = function(sel){return document.getElementById(sel)};
-var latest_stable, latest_freesmug, downloadURL;
-var versionNumber = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
+chrome.storage.sync.get(['updateStartup', 'updateHourly', 'officialStable', 'stableMismatch'], function(items)
+  {
+       updateStartup = (items.updateStartup) ? items.updateStartup : true;
+       updateHourly = (items.updateHourly) ? items.updateHourly : false;
+       officialStable = (items.officialStable) ? items.officialStable : false;
+       stableMismatch = (items.stableMismatch) ? items.stableMismatch : false;
+  });
 
 
-// setTimeout workaround
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+  latestFreesmug = (request.freesmug || latestFreesmug) ? request.freesmug : false;
+  downloadURL = (request.url || downloadURL) ? request.url : false;
+  latestStable = (request.stable || latestStable) ? request.stable : false;
+  if (latestFreesmug) {
+    $('loadingFreesmug').style.display = "none";
+    $('freesmugLabel').innerText = latestFreesmug;
+  }
+  if (latestFreesmug && downloadURL) {
+    matchVersion(latestFreesmug, downloadURL)
+  }
+  if (latestStable) {
+    $('loadingStable').style.display = "none";
+    $('stableLabel').innerText = latestStable;
+    $('calendar').addEventListener('click', function() {window.open("https://www.chromium.org/developers/calendar")});
+  }
+  });
+
 setTimeout(function(){
-  xid('installed_label').innerText += versionNumber;
-  xid('releaseCalendar').addEventListener('click', function () {window.open("https://omahaproxy.appspot.com/")});
-  latestFreesmug();
-  setTimeout(latestStable, 500);
+  bg.getFreesmug(false);
+    setTimeout(function() {
+        $('installedLabel').innerText = currentVer;
+      }, 400);
+    if(officialStable) {
+        $('stable').style.visibility = "visible";
+        bg.getStable(false);
+    }
 }, 100);
 
-// Async XMLHttpRequest with callback
-function getXML(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.open ("GET", url, true);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) {
-      if (typeof callback == "function") {
-        callback.apply(xhr);
-      }
+function matchVersion (version, link) {
+  if (currentVer < latestFreesmug) {    
+    $('installedLabel').setAttribute("style", "color: Crimson; font-weight: bold");
+    $('freesmugLabel').setAttribute("style", "color: MediumSeaGreen; font-weight: bold");
+    $('updateMsg').setAttribute("style", "color: Crimson; font-weight: bold");
+    $('downloadBtn').addEventListener('click', function() { window.open(downloadURL) });
+    $('options').addEventListener('click', function() { chrome.runtime.openOptionsPage();});
+    setTimeout(function() {
+      $('updateMsg').innerHTML = 'Your Chromium is out of date';
+      $('download').style.visibility = "visible";
+    }, 400);    
     }
-  }
-  xhr.send();
-}
 
-function latestStable () {
-	getXML("https://omahaproxy.appspot.com/all", function () {
-	    resp = this.responseText;
-      resp = resp.match("mac,stable,([^,]+)");
-      latest_stable = String(resp).split(",")[2];
-		xid('stable_label').innerText += latest_stable;
-  	});
-}
-
-function latestFreesmug () {
-  getXML("http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium", function () {
-    var xml = this.responseXML;
-    var link = xml.documentElement.getElementsByTagName("item")[0].getElementsByTagName("link")[0].innerHTML;
-    latest_freesmug = String(link.match("Chromium_OSX_(.+?)\.dmg")).split(",")[1];
-    downloadURL = link;  
-    xid('freesmug_label').innerText += latest_freesmug;
-    setTimeout("matchVersion()", 400);
-	});
-
-}
-
-function matchVersion () {
-    if (versionNumber < latest_freesmug) {
-    	xid('updateMsg').style.color = "red";
-      xid('installed_label').style.color = "red";
-      xid('installed_label').style.fontWeight = "bold";
-      xid('freesmug_label').style.color = "green";
-      xid('freesmug_label').style.fontWeight = "bold";
-        xid('updateMsg').innerHTML = 'Your Chromium is out of date. Please update!!';
-        downloadBtn.addEventListener('click', function () {window.open(downloadURL)});
-        downloadBtn.disabled = false;
-	}
-    else if (versionNumber >= latest_freesmug) {
-    	xid('updateMsg').style.color = "green";
-      xid('updateMsg').style.fontWeight = "bold";
-    	xid('installed_label').style.color = "green";
-    	xid('installed_label').style.fontWeight = "bold";
-    	xid('freesmug_label').style.color = "green";
-    	xid('freesmug_label').style.fontWeight = "bold";
-        xid('updateMsg').innerText = "You're up to date!";
+  else if (currentVer >= latestFreesmug) {
+    ['updateMsg', 'installedLabel', 'freesmugLabel'].forEach(function (s) {
+        $(s).setAttribute('style', 'color:Green ;'); 
+    });
+    setTimeout(function() {
+    $('updateMsg').innerText = "You're up to date!";
+    }, 400);
 	}
 }
-
-
 

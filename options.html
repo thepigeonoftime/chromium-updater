@@ -4,10 +4,7 @@
     <title>FreeSMUG Updater Options</title>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-
-    <meta name="author" content="Anatol Liebermann" />
-    <meta name="copyright" content="Copyright Benjamin Bojko 2014. All Rights Reserved." />
+    <!-- <meta name="viewport" content="width=device-width"> -->
 
 <!--     <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,300italic" rel="stylesheet" type="text/css"> -->
     <link rel="stylesheet" href="css/options.css" type="text/css">
@@ -16,26 +13,27 @@
 
     <div id="main">
       <!-- <h1 class="header-title">FreeSMUG Chromium Updater</h1> -->
-      <img src="images/options.png">
+<!--       <img src="images/options.png"> -->
       <section>
         <h2>Check for Updates</h2>
         <ul>
-          <li><input type="checkbox" name="startupdate" id="startupdate" /><label for="startupdate">On Startup</label></li>
-          <li><input type="checkbox" name="intupdate" id="intupdate" /><label for="intupdate">Every <i>x</i> Minutes: </label><input type="number" id="input_minutes" size="4" value="60"></li>
+          <li><input type="checkbox" name="updateStartup" id="updateStartup" /><label for="updateStartup"> On Startup</label></li>
+          <li><input type="checkbox" name="updateHourly" id="updateHourly" /><label for="updateHourly"> Every Hour</li>
         </ul>
-	</section>
-	<section>
-		<h2>Developer Options</h2>
+  
+        <div class="spacer"></div>
+		<h2>Advanced Options</h2>
         <ul>
-        	<li><input type="checkbox" name="official_stable" id="official_stable" /><label for="official_stable">Include check for latest <i>official</i> Chrome stable</label></li>
+        	<li><input type="checkbox" name="officialStable" id="officialStable" /><label for="officialStable"> Include check for latest official stable <br></label><div style="font-size:8pt;margin-top:3px;margin-left:20px;color:#666">(based on <a href="https://omahaproxy.appspot.com/">release calendar</a>)</div></li>
 
-          	<li><input type="checkbox" name="mismatch" id="mismatch" disabled="disabled" /><span id="mismatch_disabled">Alert on Version mismatch</span><label id="mismatch_label" for="mismatch"></label></li>
+          	<li><input type="checkbox" name="stableMismatch" id="stableMismatch" disabled="disabled" /><span id="mismatch_disabled"> Notify on version mismatch</span><label id="mismatch_label" for="stableMismatch"></label></li>
         </ul>
       </section>
-
-      <section>
+    <div id="status"></div>
+    <div id="save"></div>
+<!--       <section>
         <p id="footer">Extension by <a href="http://anatolius.net" target="_blank">Anatol Liebermann</a> | Design based on <a href="https://github.com/Hallbin/extension.chromium-updater">Chromium Updater</a> by <a href="https://github.com/Hallbin/">Hallbin</a></p>
-      </section>
+      </section> -->
     </div>
 
 

@@ -1,6 +1,7 @@
 {
    "author": "Anatol Liebermann",
    "background": {
+      "persistent": true,
       "scripts": [ "js/background.js" ]
    },
    "browser_action": { 
@@ -18,7 +19,16 @@
    "manifest_version": 2,
    "name": "__MSG_Name__",
    "options_page": "options.html",
-   "permissions": [ "contextMenus", "tabs", "http://commondatastorage.googleapis.com/*", "http://sourceforge.net/projects/osxportableapps/*", "https://omahaproxy.appspot.com/*", "cookies" ],
+   "options_ui": {
+    // Required.
+    "page": "options.html",
+    // Recommended.
+    "chrome_style": true
+    // Not recommended; only provided for backwards compatibility,
+    // and will be unsupported in a future version of Chrome (TBD).
+   //"open_in_tab": true
+  },
+   "permissions": ["storage", "alarms", "notifications", "contextMenus", "tabs", "http://commondatastorage.googleapis.com/*", "http://sourceforge.net/projects/osxportableapps/*", "https://omahaproxy.appspot.com/*", "cookies" ],
    "update_url": "http://clients2.google.com/service/update2/crx",
-   "version": "0.1"
+   "version": "0.8"
 }

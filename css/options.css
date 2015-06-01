@@ -13,11 +13,15 @@ figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   margin: 0;
-  padding: 0;
+  padding: 20;
   border: 0;
   font: inherit;
   font-size: 100%;
   vertical-align: baseline;
+}
+
+* {
+  outline: 0;
 }
 
 /* line 22, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.7/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
@@ -67,7 +71,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body {
   margin: 0;
   padding: 0;
-  background: #6699cc;
+  /*background: #6699cc;*/
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 300;
   font-size: 62.5%;
@@ -92,8 +96,10 @@ small {
 
 /* line 77, ../sass/options.scss */
 #main {
-  width: 60em;
-  margin: 6em auto;
+  width: 40em;
+    padding: 3em;
+  margin: 0.5em 0;
+  /*margin: 6em auto;*/
 }
 
 /* line 82, ../sass/options.scss */
@@ -143,11 +149,10 @@ small {
 /* line 107, ../sass/options.scss */
 section {
   background: rgba(255, 255, 255, 0.9);
-  -webkit-box-shadow: 0px 1px 4px 0px rgba(85, 98, 112, 0.5);
+/*  -webkit-box-shadow: 0px 1px 4px 0px rgba(85, 98, 112, 0.5);
   -moz-box-shadow: 0px 1px 4px 0px rgba(85, 98, 112, 0.5);
-  box-shadow: 0px 1px 4px 0px rgba(85, 98, 112, 0.5);
-  padding: 3em;
-  margin: 4em 0;
+  box-shadow: 0px 1px 4px 0px rgba(85, 98, 112, 0.5);*/
+
 }
 
 /* line 115, ../sass/options.scss */
@@ -167,8 +172,8 @@ section.two.columns.b {
 /* line 128, ../sass/options.scss */
 h1, h2, h3 {
   font-weight: 100;
-  line-height: 1em;
-  margin: 0 0 0.5em 0;
+  line-height: 0.5em;
+  margin: 0 0 2 0;
   padding: 0;
 }
 
@@ -187,7 +192,7 @@ h1:only-child {
 /* line 144, ../sass/options.scss */
 h2 {
   color: #666666;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 /* line 148, ../sass/options.scss */
@@ -210,7 +215,7 @@ h2 + ul,
 h2 + ol,
 h2 + p,
 h3 {
-  border-top: 1px dashed rgba(85, 98, 112, 0.25);
+  /*border-top: 1px dashed rgba(85, 98, 112, 0.25);*/
   padding-top: 1em;
 }
 
@@ -530,11 +535,11 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 label {
-  font-size:11pt;
+  font-size:10pt;
 }
 
 #mismatch_disabled {
-  font-size:11pt;
+  font-size:10pt;
   opacity: 0.5;
 }
 
@@ -547,4 +552,10 @@ label {
 }
 #footer a {
   font-size:11pt;
+}
+
+.spacer {
+  width:100%;
+  min-height:40px;
+  display:block;
 }
