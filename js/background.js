@@ -10,9 +10,9 @@ var $ = document.getElementById.bind(document);
 var latestStable, latestFreesmug, downloadURL;
 var updateStartup, updateHourly, officialStable, stableMismatch;
 var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
-// Test Value
+// // Test Value
 currentVer = "42.0.2357.81";
-//
+// //
 
 chrome.storage.sync.get(['updateStartup', 'updateHourly', 'officialStable', 'stableMismatch'], function(items)
   {

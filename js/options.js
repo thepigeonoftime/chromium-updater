@@ -67,8 +67,8 @@ function restore_options() {
     $('updateStartup').checked = items.updateStartup;
 	$('updateHourly').checked = items.updateHourly;
 	$('officialStable').checked = items.officialStable;
-    $('stableMismatch').checked = items.mismatch;
     if($('officialStable').checked) { mismatch_enable() ;}
+    $('stableMismatch').checked = items.stableMismatch;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
