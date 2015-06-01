@@ -12,12 +12,12 @@ function mismatch_enable () {
 	if ($("stableMismatch").disabled) {
 		$("stableMismatch").disabled = false;
 		$("mismatch_disabled").innerText = "";
-		$("mismatch_label").innerText = "Notify on Version mismatch";
+		$("mismatch_label").innerText = " Notify on Version mismatch";
 	}
 	else {
 		$("stableMismatch").checked = false;
 		$("stableMismatch").disabled = true;
-		$("mismatch_disabled").innerText = "Notify on Version mismatch";
+		$("mismatch_disabled").innerText = " Notify on Version mismatch";
 		$("mismatch_label").innerText = "";
 	}
 }
