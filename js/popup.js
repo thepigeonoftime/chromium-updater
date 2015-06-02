@@ -6,12 +6,14 @@ Version: 0.1
 */
 
 var $ = document.getElementById.bind(document);
+// var $$ = function(sel) { return document.getElementsByTagName(sel);}
+var $$ = document.getElementsByTagName.bind(document);
 var bg = chrome.extension.getBackgroundPage();
 var latestStable, latestFreesmug, downloadURL = false;
 var updateStartup, updateHourly, officialStable, stableMismatch;
 var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
 // Test Value
-currentVer = "42.0.2357.81";
+// currentVer = "42.0.2357.81";
 
 chrome.storage.sync.get(['updateStartup', 'updateHourly', 'officialStable', 'stableMismatch'], function(items)
   {
@@ -19,8 +21,24 @@ chrome.storage.sync.get(['updateStartup', 'updateHourly', 'officialStable', 'sta
        updateHourly = (items.updateHourly) ? items.updateHourly : false;
        officialStable = (items.officialStable) ? items.officialStable : false;
        stableMismatch = (items.stableMismatch) ? items.stableMismatch : false;
+       init()
   });
 
+document.addEventListener('DOMContentLoaded', function() {
+  $('options').addEventListener('click', function() { chrome.runtime.openOptionsPage();});
+});
+
+
+function init() {
+  bg.getFreesmug(false);
+  if(officialStable) {
+    $('stable').style.visibility = "visible";
+    bg.getStable(false);
+  } 
+  setTimeout(function() {
+    $('installedLabel').innerText = currentVer;
+  }, 400);
+}
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
@@ -29,44 +47,46 @@ chrome.runtime.onMessage.addListener(
   latestStable = (request.stable || latestStable) ? request.stable : false;
   if (latestFreesmug) {
     $('loadingFreesmug').style.display = "none";
-    $('freesmugLabel').innerText = latestFreesmug;
+    $('freesmugVersion').innerHTML = latestFreesmug;
   }
   if (latestFreesmug && downloadURL) {
     matchVersion(latestFreesmug, downloadURL)
   }
   if (latestStable) {
     $('loadingStable').style.display = "none";
-    $('stableLabel').innerText = latestStable;
+    $('stableVersion').innerHTML = latestStable;
     $('calendar').addEventListener('click', function() {window.open("https://www.chromium.org/developers/calendar")});
   }
   });
 
-setTimeout(function(){
-  bg.getFreesmug(false);
-    setTimeout(function() {
-        $('installedLabel').innerText = currentVer;
-      }, 400);
-    if(officialStable) {
-        $('stable').style.visibility = "visible";
-        bg.getStable(false);
-    }
-}, 100);
+
 
 function matchVersion (version, link) {
-  if (currentVer < latestFreesmug) {    
+  if(!link) {
+
+  }
+  else if (currentVer < latestFreesmug) {    
     $('installedLabel').setAttribute("style", "color: Crimson; font-weight: bold");
-    $('freesmugLabel').setAttribute("style", "color: MediumSeaGreen; font-weight: bold");
+    $('freesmugVersion').setAttribute("style", "color: MediumSeaGreen; font-weight: bold");
     $('updateMsg').setAttribute("style", "color: Crimson; font-weight: bold");
     $('downloadBtn').addEventListener('click', function() { window.open(downloadURL) });
-    $('options').addEventListener('click', function() { chrome.runtime.openOptionsPage();});
-    setTimeout(function() {
-      $('updateMsg').innerHTML = 'Your Chromium is out of date';
-      $('download').style.visibility = "visible";
-    }, 400);    
+    document.body.style.height = "150px";
+    resize = function() {
+        setTimeout(function(){
+          document.body.style.height = (parseFloat(document.body.style.height)+5)+"px";
+          if(parseFloat(document.body.style.height) < 170) {
+                resize();
+          }
+          else {
+            $('updateMsg').innerHTML = 'Your Chromium is out of date';
+            $('download').style.display = "block";
+          }
+        }, 50);
     }
-
+    resize();
+  }
   else if (currentVer >= latestFreesmug) {
-    ['updateMsg', 'installedLabel', 'freesmugLabel'].forEach(function (s) {
+    ['updateMsg', 'installedLabel', 'freesmugVersion'].forEach(function (s) {
         $(s).setAttribute('style', 'color:Green ;'); 
     });
     setTimeout(function() {
@@ -74,4 +94,5 @@ function matchVersion (version, link) {
     }, 400);
 	}
 }
+
 

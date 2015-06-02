@@ -11,7 +11,7 @@ var latestStable, latestFreesmug, downloadURL;
 var updateStartup, updateHourly, officialStable, stableMismatch;
 var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
 // // Test Value
-currentVer = "42.0.2357.81";
+// currentVer = "42.0.2357.81";
 // //
 
 chrome.storage.sync.get(['updateStartup', 'updateHourly', 'officialStable', 'stableMismatch'], function(items)
@@ -38,13 +38,13 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 
 
 function init() {
-  if(updateStartup) {
-    getFreesmug(true);
-  }
   if (updateHourly) {
     hourly();  
   }
-  if (officialStable) {
+  else if (updateStartup) {
+    getFreesmug(true);
+  }
+  if (officialStable && stableMismatch) {
     getStable(true);
   }
 }
@@ -60,40 +60,63 @@ function getXML(url, callback) {
     }
   }
   xhr.send();
+  setTimeout(function() {
+        if (xhr.readyState < 4) {
+            // Timeout !
+            xhr.abort();
+            callback(true)
+
+        }
+    }, 10000);
 }
 
 function getFreesmug(callback) {
-  getXML("http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium", function() {
-    var xml = this.responseXML;
-    var link = xml.documentElement.getElementsByTagName("item")[0].getElementsByTagName("link")[0].innerHTML;
-    latestFreesmug = String(link.match("Chromium_OSX_(.+?)\.dmg")).split(",")[1];
-    downloadURL = link;  
-    if(callback) { 
-      matchVersion('freesmug');
+  getXML("http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium", function(error) {
+    if(!error) {
+      var xml = this.responseXML;
+      var link = xml.documentElement.getElementsByTagName("item")[0].getElementsByTagName("link")[0].innerHTML;
+      latestFreesmug = String(link.match("Chromium_OSX_(.+?)\.dmg")).split(",")[1];
+      downloadURL = link;  
+      if(callback) { 
+        matchVersion('freesmug');
+      }
+      else {
+        chrome.runtime.sendMessage({
+        freesmug: latestFreesmug,
+        url: downloadURL
+      });
+      }
     }
     else {
-      chrome.runtime.sendMessage({
-      freesmug: latestFreesmug,
-      url: downloadURL
-    });
+        chrome.runtime.sendMessage({
+        freesmug: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout</span>',
+        url: false
+      });
     }
   })
 }
 
 function getStable(background) {
-  getXML("https://omahaproxy.appspot.com/all", function() {
-      resp = this.responseText;
-      resp = resp.match("mac,stable,([^,]+)");
-      latestStable = String(resp).split(",")[2];
-      if (background) {
-        matchVersion('stable');
+  getXML("https://omahaproxy.appspot.com/all", function(error) {
+      if(!error) {
+        resp = this.responseText;
+        resp = resp.match("mac,stable,([^,]+)");
+        latestStable = String(resp).split(",")[2];
+        if (background) {
+          matchVersion('stable');
+        }
+        else {
+        chrome.runtime.sendMessage({
+          stable: latestStable
+        });
       }
-      else {
+    }
+    else {
       chrome.runtime.sendMessage({
-        stable: latestStable
+      stable: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout</span>',
       });
     }
-    });
+  });
 }
 
 
@@ -125,13 +148,15 @@ function matchVersion (channel) {
   }
 
   if (channel == 'stable' && currentVer < latestStable) {
-    uuid = (String)(Date.now());
-    title = "Your Chromium version doesn't match the official stable";
-    message = "Installed: "+currentVer+"\nLatest Stable: "+latestStable;
-    button = "Go to Chromium Projects";
-    icon = 'images/stable.png';
-    url = 'https://www.chromium.org/developers/calendar';
-    notify(uuid, title, message, button, icon, url);
+    setTimeout(function() {
+      uuid = (String)(Date.now());
+      title = "Your Chromium version doesn't match the official stable";
+      message = "Installed: "+currentVer+"\nLatest Stable: "+latestStable;
+      button = "Go to Chromium Projects";
+      icon = 'images/stable.png';
+      url = 'https://www.chromium.org/developers/calendar';
+      notify(uuid, title, message, button, icon, url);
+    }, 2000);
   }
 }
 

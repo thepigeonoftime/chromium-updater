@@ -1,3 +1,8 @@
+body, html {
+		height:150px;
+}
+
+
 body{background:-webkit-gradient(linear,left bottom,left top,from(#eee),to(#fff)) no-repeat fixed right bottom;font-family:"メイリオ","Meiryo",verdana,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;font-size:12px;line-height:150%;}
 #main{
 	margin-top:auto;
@@ -132,6 +137,14 @@ width: 165px;
 	width:150px;
 }
 
+.stableLabel{
+	float:left;
+	font-size:10px;
+	height:12px;
+	color:#AAA;
+	width:150px;
+}
+
 .versionLabel{
 	float:right;
 	font-size:10px;
@@ -141,24 +154,25 @@ width: 165px;
 
 #stable {
 	visibility: hidden;
-	/*opacity: 0.5;*/
+	opacity: 0.7;
 	color:#AAA !important;
+	padding-bottom: 10px;
 }
 
-#stableLabel{
+#stableVersion{
 	color:#AAA !important;
 	text-decoration:none;
 }
 
 
-#cal a, #cal a:active, #cal a:visited{
-	color:#888 !important;
+#calendar a, #calendar a:active, #calendar a:visited{
+	color:#333 !important;
 	font-size:7pt;
 	text-decoration: none;
 	outline: 0;
 	/*opacity: 0.8 !important;*/
 }
-#cal a:hover {
+#calendar a:hover {
 	text-decoration: underline;
 }
 
@@ -171,7 +185,8 @@ width: 165px;
 }
 
 #download {
-	visibility: hidden;
+	/*visibility: hidden;*/
+	display:none;
 }
 
 #options {
@@ -180,4 +195,8 @@ opacity:0.5;
 top:10px;
 right:10px;
 outline: 0;
+}
+
+* {
+	outline: 0;
 }
