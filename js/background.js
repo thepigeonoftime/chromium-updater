@@ -24,6 +24,10 @@ chrome.storage.sync.get(['updateStartup', 'updateHourly', 'officialStable', 'sta
 
   });
 
+document.addEventListener('DOMContentLoaded', function() {
+  $('options').addEventListener('click', function() { chrome.runtime.openOptionsPage();});
+});
+
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
   if (request.method == "getLocalStorage")
       sendResponse({data: localStorage[request.key]});
