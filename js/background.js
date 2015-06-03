@@ -96,7 +96,7 @@ function getFreesmug(callback) {
       }
     }
     catch(err) {
-      console.log('XML Parse Error')
+      console.log(err);
       chrome.runtime.sendMessage({
         freesmug: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Error parsing XML</span>',
         url: false
@@ -149,7 +149,7 @@ function hourlyUpdate() {
 }; 
 
 function matchVersion (channel) {
-  var uuid, message, button;
+  var uuid, message, button, buttonIcon, url;
   
   if (channel == 'freesmug' && currentVer < latestFreesmug) {
     uuid = (String)(Date.now());
@@ -160,7 +160,7 @@ function matchVersion (channel) {
     button = 'Download Update';
     buttonIcon = "images/download.png";
     url = downloadURL;
-    notify(uuid, icon, title, message, button, buttonIcon, url);
+    notify(uuid, icon, title, message, button, buttonIcon, url, true);
   }
 
   if (channel == 'stable' && currentVer < latestStable) {
@@ -177,19 +177,20 @@ function matchVersion (channel) {
   }
 }
 
-function notify(uuid, icon, title, message, button, buttonIcon, url) {
-   chrome.notifications.create(
-    uuid,{   
-      type: 'basic',
-      iconUrl: icon,
-      title: title,
-      message: message,
-      buttons: [{ title: button,
-                  iconUrl:buttonIcon}],
-             isClickable: true,
-  }); 
-  chrome.browserAction.onClicked.addListener(function() {window.open(url)});
-  chrome.notifications.onClicked.addListener(function() {window.open(url)});
-  chrome.notifications.onButtonClicked.addListener(function() {window.open(url)});
-  chrome.runtime.onInstalled.addListener(function() {window.open(url)});
+function notify(uuid, icon, title, message, button, buttonIcon, url, button2) {
+  richNote = { type: 'basic', iconUrl: icon, title: title, message: message, buttons: [{ title: button, iconUrl: buttonIcon}], isClickable: true } 
+  if (button2) { 
+    richNote.buttons.push({title: "Go to FreeSMUG", iconUrl: "images/arrow.png"});
+  }
+  var link = function (notificationId, buttonIndex) {
+    url = (buttonIndex > 0) ? 'http://www.freesmug.org/chromium' : url;
+    window.open(url);
+  };
+  chrome.notifications.create(uuid, richNote);
+  chrome.notifications.onButtonClicked.addListener(function (notificationId, buttonIndex) {
+    if(uuid == notificationId) {
+      url = (buttonIndex > 0) ? 'http://www.freesmug.org/chromium' : url;
+      window.open(url);
+    }
+  });
 }

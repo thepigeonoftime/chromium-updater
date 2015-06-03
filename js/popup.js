@@ -89,5 +89,6 @@ chrome.runtime.onMessage.addListener(
 );
 
 document.addEventListener('DOMContentLoaded', function() {
+  $('banner').addEventListener('click', function() { window.open("http://www.freesmug.org/chromium") });
   $('options').addEventListener('click', function() { chrome.runtime.openOptionsPage();});
 });
