@@ -36,7 +36,7 @@ function save_options() {
   }, function() {
   	if (updateHourly) { 
   		chrome.extension.getBackgroundPage().updateHourly = true;
-  		chrome.extension.getBackgroundPage().hourly();
+  		chrome.extension.getBackgroundPage().hourlyUpdate();
   	}
   	else {
   		chrome.extension.getBackgroundPage().updateHourly = false;
