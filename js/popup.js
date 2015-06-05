@@ -28,7 +28,8 @@ function init() {
 
 function matchVersion (version, link) {
   if(link) {
-    if (currentVer < latestFreesmug) {    
+    if (currentVer < latestFreesmug) {
+      chrome.browserAction.setIcon({path: 'images/update.png'});    
       $('installedLabel').setAttribute("style", "color: Crimson; font-weight: bold");
       $('freesmugVersion').setAttribute("style", "color: MediumSeaGreen; font-weight: bold");
       $('updateMsg').setAttribute("style", "color: Crimson; font-weight: bold");

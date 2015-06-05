@@ -152,8 +152,9 @@ function matchVersion (channel) {
   var uuid, message, button, buttonIcon, url;
   
   if (channel == 'freesmug' && currentVer < latestFreesmug) {
+    chrome.browserAction.setIcon({path: 'images/update.png'});    
     uuid = (String)(Date.now());
-    icon = 'images/update.png';
+    icon = 'images/popup.png';
     title = 'A new version of Chromium is available.';
     message = '';
     // message = "Installed:          "+currentVer+"\nLatest Version:  "+latestFreesmug;
