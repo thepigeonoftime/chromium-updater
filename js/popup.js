@@ -50,6 +50,7 @@ function matchVersion (version, link) {
       resize();
     }
     else if (currentVer >= latestFreesmug) {
+      chrome.browserAction.setIcon({path: 'images/popup.png'});
       ['updateMsg', 'installedLabel', 'freesmugVersion'].forEach(function (s) {
           $(s).setAttribute('style', 'color:Green ;'); 
       });
