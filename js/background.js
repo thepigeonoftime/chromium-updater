@@ -154,14 +154,14 @@ function matchVersion (channel, version) {
   var current = currentVer.split('.');
   version = version.split('.');
   version.every(function(c,i,a) {
-      console.log(current[i]+" "+version[i]);
-      if (parseFloat(current[i]) > parseFloat(version[i])) {
+      if (parseFloat(version[i]) <= parseFloat(current[i])) {
+        console.log(current[i]+" "+version[i]);
         update = false;
-        return false;
+        return true;
       }
       else {
         update = true;
-        return true;
+        return false;
       }
     });
 console.log(update);

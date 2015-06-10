@@ -33,15 +33,14 @@ function matchVersion (version, link) {
       current = currentVer.split('.');
       version = version.split('.');
       version.every(function(c,i,a) {
-      if (parseFloat(current[i]) > parseFloat(version[i])) {
+      if (parseFloat(version[i]) <= parseFloat(current[i])) {
         console.log(current[i]+" "+version[i]);
         update = false;
-        return false;
+        return true;
       }
       else {
-        console.log(true);
         update = true;
-        return true;
+        return false;
       }
     });
     if (update) {
