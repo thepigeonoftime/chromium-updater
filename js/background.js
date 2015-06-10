@@ -153,9 +153,17 @@ function matchVersion (channel, version) {
   var uuid, message, button, buttonIcon, url, update;
   var current = currentVer.split('.');
   version = version.split('.');
-  version.forEach(function(c,i,a) {
-    update = (parseFloat(version[i]) > parseFloat(current[i])) ? true : false;
-  });
+  version.every(function(c,i,a) {
+      console.log(current[i]+" "+version[i]);
+      if (parseFloat(current[i]) > parseFloat(version[i])) {
+        update = false;
+        return false;
+      }
+      else {
+        update = true;
+        return true;
+      }
+    });
 console.log(update);
   
   if (channel == 'freesmug' && update) {
