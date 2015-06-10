@@ -12,12 +12,13 @@ var latestStable, latestFreesmug, downloadURL = false;
 var updateStartup, updateHourly, officialStable, stableMismatch;
 var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
 // Test Value
-// currentVer = "42.0.2357.81";
+// currentVer = "43.0.2357.81";
 
 function init() {
   backend.getFreesmug(false);
   if(officialStable) {
-    $('stable').style.visibility = "visible";
+    // $('stable').style.visibility = "visible";
+    $('stable').style.display  = 'block';
     backend.getStable(false);
   } 
   setTimeout(function() {
@@ -28,17 +29,34 @@ function init() {
 
 function matchVersion (version, link) {
   if(link) {
-    if (currentVer < latestFreesmug) {
+      var update;
+      current = currentVer.split('.');
+      version = version.split('.');
+      version.every(function(c,i,a) {
+      if (parseFloat(current[i]) > parseFloat(version[i])) {
+        console.log(current[i]+" "+version[i]);
+        update = false;
+        return false;
+      }
+      else {
+        console.log(true);
+        update = true;
+        return true;
+      }
+    });
+    if (update) {
       chrome.browserAction.setIcon({path: 'images/update.png'});    
-      $('installedLabel').setAttribute("style", "color: Crimson; font-weight: bold");
-      $('freesmugVersion').setAttribute("style", "color: MediumSeaGreen; font-weight: bold");
-      $('updateMsg').setAttribute("style", "color: Crimson; font-weight: bold");
+      $('installedLabel').setAttribute("style", "color: #ed1d0b; font-weight: none");
+      $('freesmugVersion').setAttribute("style", "color: #4f9906; font-weight: none");
+      $('updateMsg').setAttribute("style", "color: #ed1d0b; font-weight: none");
       $('downloadBtn').addEventListener('click', function() { window.open(downloadURL) });
       document.body.style.height = "150px";
       resize = function() {
+          var limit = (officialStable) ? 170 : 160;
+          console.log(limit);
           setTimeout(function(){
             document.body.style.height = (parseFloat(document.body.style.height)+5)+"px";
-            if(parseFloat(document.body.style.height) < 170) {
+            if(parseFloat(document.body.style.height) < limit) {
                   resize();
             }
             else {
@@ -49,10 +67,10 @@ function matchVersion (version, link) {
       }
       resize();
     }
-    else if (currentVer >= latestFreesmug) {
+    else {
       chrome.browserAction.setIcon({path: 'images/popup.png'});
       ['updateMsg', 'installedLabel', 'freesmugVersion'].forEach(function (s) {
-          $(s).setAttribute('style', 'color:Green ;'); 
+          $(s).setAttribute('style', 'color:#4f9906 ;'); 
       });
       setTimeout(function() {
       $('updateMsg').innerText = "You're up to date!";

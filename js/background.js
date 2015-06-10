@@ -84,9 +84,10 @@ function getFreesmug(callback) {
       var xml = this.responseXML;
       var link = xml.documentElement.getElementsByTagName("item")[0].getElementsByTagName("link")[0].innerHTML;
       latestFreesmug = String(link.match("Chromium_OSX_(.+?)\.dmg")).split(",")[1];
+      console.log(latestFreesmug);
       downloadURL = link;  
       if(callback) { 
-        matchVersion('freesmug');
+        matchVersion('freesmug', latestFreesmug);
       }
       else {
         chrome.runtime.sendMessage({
@@ -119,7 +120,7 @@ function getStable(background) {
           resp = resp.match("mac,stable,([^,]+)");
           latestStable = String(resp).split(",")[2];
           if (background) {
-            matchVersion('stable');
+            matchVersion('stable', latestStable);
           }
           else {
             chrome.runtime.sendMessage({
@@ -148,10 +149,16 @@ function hourlyUpdate() {
   }
 }; 
 
-function matchVersion (channel) {
-  var uuid, message, button, buttonIcon, url;
+function matchVersion (channel, version) {
+  var uuid, message, button, buttonIcon, url, update;
+  var current = currentVer.split('.');
+  version = version.split('.');
+  version.forEach(function(c,i,a) {
+    update = (parseFloat(version[i]) > parseFloat(current[i])) ? true : false;
+  });
+console.log(update);
   
-  if (channel == 'freesmug' && currentVer < latestFreesmug) {
+  if (channel == 'freesmug' && update) {
     chrome.browserAction.setIcon({path: 'images/update.png'});    
     uuid = (String)(Date.now());
     icon = 'images/update.png';
@@ -164,7 +171,7 @@ function matchVersion (channel) {
     notify(uuid, icon, title, message, button, buttonIcon, url, true);
   }
 
-  if (channel == 'stable' && currentVer < latestStable) {
+  if (channel == 'stable' && update) {
     setTimeout(function() {
       uuid = (String)(Date.now());
       icon = 'images/stable.png';
