@@ -11,7 +11,7 @@ var latestStable, latestFreesmug, downloadURL;
 var updateStartup, updateHourly, officialStable, stableMismatch;
 var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
 // // Test Value
-// currentVer = "41.0.2357.81";
+// currentVer = "43.0.2357.111";
 // //
 
 chrome.storage.sync.get(['updateStartup', 'updateHourly', 'officialStable', 'stableMismatch'], function(items)
@@ -84,7 +84,6 @@ function getFreesmug(callback) {
       var xml = this.responseXML;
       var link = xml.documentElement.getElementsByTagName("item")[0].getElementsByTagName("link")[0].innerHTML;
       latestFreesmug = String(link.match("Chromium_OSX_(.+?)\.dmg")).split(",")[1];
-      console.log(latestFreesmug);
       downloadURL = link;  
       if(callback) { 
         matchVersion('freesmug', latestFreesmug);
@@ -150,19 +149,19 @@ function hourlyUpdate() {
 }; 
 
 function matchVersion (channel, version) {
-  var uuid, message, button, buttonIcon, url, update;
+  var uuid, message, button, buttonIcon, url;
+  var update = false;
   var current = currentVer.split('.');
   version = version.split('.');
   version.every(function(c,i,a) {
-      if (parseFloat(version[i]) <= parseFloat(current[i])) {
-        console.log(current[i]+" "+version[i]);
-        update = false;
-        return true;
-      }
-      else {
-        update = true;
+    console.log(current[i]+" "+version[i]);
+      if (parseFloat(current[i]) > parseFloat(version[i])) {
         return false;
       }
+      else if (parseFloat(current[i]) < parseFloat(version[i])) {
+        update = true;
+      }
+    return true;
     });
 console.log(update);
   

@@ -12,7 +12,7 @@ var latestStable, latestFreesmug, downloadURL = false;
 var updateStartup, updateHourly, officialStable, stableMismatch;
 var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
 // Test Value
-// currentVer = "43.0.2357.81";
+// currentVer = "43.0.2357.111";
 
 function init() {
   backend.getFreesmug(false);
@@ -33,16 +33,15 @@ function matchVersion (version, link) {
       current = currentVer.split('.');
       version = version.split('.');
       version.every(function(c,i,a) {
-      if (parseFloat(version[i]) <= parseFloat(current[i])) {
         console.log(current[i]+" "+version[i]);
-        update = false;
+          if (parseFloat(current[i]) > parseFloat(version[i])) {
+            return false;
+          }
+          else if (parseFloat(current[i]) < parseFloat(version[i])) {
+            update = true;
+          }
         return true;
-      }
-      else {
-        update = true;
-        return false;
-      }
-    });
+        });
     if (update) {
       chrome.browserAction.setIcon({path: 'images/update.png'});    
       $('installedLabel').setAttribute("style", "color: #ed1d0b; font-weight: none");
