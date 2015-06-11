@@ -5,6 +5,10 @@ $("mismatch_disabled").addEventListener("click", function(event){
     event.preventDefault()
 });
 
+$("credits").addEventListener("click", function() {
+  window.open("https://anatolius.net");
+})
+
 $("officialStable").addEventListener("click", mismatch_enable);
 
 

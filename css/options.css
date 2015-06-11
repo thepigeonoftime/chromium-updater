@@ -480,3 +480,14 @@ label {
   min-height:40px;
   display:block;
 }
+
+
+#credits {
+  text-align: center;
+  float:bottom;
+  color: #AAA;
+}
+
+#credits a {
+ color: #999; 
+}
