@@ -11,8 +11,6 @@ var backend = chrome.extension.getBackgroundPage();
 var latestStable, latestFreesmug, downloadURL = false;
 var updateStartup, updateHourly, officialStable, stableMismatch;
 var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
-// Test Value
-// currentVer = "43.0.2357.111";
 
 function init() {
   backend.getFreesmug(false);

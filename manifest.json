@@ -30,5 +30,5 @@
   },
    "permissions": ["storage", "alarms", "notifications", "contextMenus", "tabs", "http://commondatastorage.googleapis.com/*", "http://sourceforge.net/projects/osxportableapps/*", "https://omahaproxy.appspot.com/*", "cookies" ],
    "update_url": "http://clients2.google.com/service/update2/crx",
-   "version": "0.8"
+   "version": "0.1.0.0"
 }

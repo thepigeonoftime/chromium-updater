@@ -10,9 +10,6 @@ var $ = document.getElementById.bind(document);
 var latestStable, latestFreesmug, downloadURL;
 var updateStartup, updateHourly, officialStable, stableMismatch;
 var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
-// // Test Value
-// currentVer = "43.0.2357.111";
-// //
 
 chrome.storage.sync.get(['updateStartup', 'updateHourly', 'officialStable', 'stableMismatch'], function(items)
   {
@@ -168,7 +165,7 @@ console.log(update);
   if (channel == 'freesmug' && update) {
     chrome.browserAction.setIcon({path: 'images/update.png'});    
     uuid = (String)(Date.now());
-    icon = 'images/update.png';
+    icon = 'images/popup.png';
     title = 'A new version of Chromium is available.';
     message = '';
     // message = "Installed:          "+currentVer+"\nLatest Version:  "+latestFreesmug;
