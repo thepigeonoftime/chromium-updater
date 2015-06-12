@@ -1,6 +1,6 @@
 /*
-Extension: FreeSMUG Chromium Updater
-Description: Check for, download and install the latest FreeSMUG Chromium revisions
+Extension: Chromium Updater
+Description: Check for, download and install the latest Chromium revisions
 Author: Anatol Liebermann
 Version: 0.1
 */
@@ -31,7 +31,6 @@ function matchVersion (version, link) {
       current = currentVer.split('.');
       version = version.split('.');
       version.every(function(c,i,a) {
-        console.log(current[i]+" "+version[i]);
           if (parseFloat(current[i]) > parseFloat(version[i])) {
             return false;
           }
@@ -49,7 +48,6 @@ function matchVersion (version, link) {
       document.body.style.height = "150px";
       resize = function() {
           var limit = (officialStable) ? 170 : 160;
-          console.log(limit);
           setTimeout(function(){
             document.body.style.height = (parseFloat(document.body.style.height)+5)+"px";
             if(parseFloat(document.body.style.height) < limit) {
