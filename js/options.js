@@ -5,9 +5,6 @@ $("mismatch_disabled").addEventListener("click", function(event){
     event.preventDefault()
 });
 
-// $("credits").addEventListener("click", function() {
-//   window.open("https://anatolius.net");
-// })
 
 $("officialStable").addEventListener("click", mismatch_enable);
 
@@ -45,7 +42,6 @@ function save_options() {
   	else {
   		chrome.extension.getBackgroundPage().updateHourly = false;
   	}
-    // Update status to let user know options were saved.
     // 	var status = $('status');
     // 	status.style.fontSize = "10pt";
     // 	status.style.color = "#99ccff";
@@ -56,12 +52,7 @@ function save_options() {
   });
 }
 
-
-
-// Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
 function restore_options() {
-  // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
 		updateStartup: true,
 		updateHourly: false,

@@ -2,7 +2,7 @@
 Extension: Chromium Updater
 Description: Check for, download and install the latest Chromium revisions
 Author: Anatol Liebermann
-Version: 0.1
+Version: 0.1.0.3
 */
 
 
