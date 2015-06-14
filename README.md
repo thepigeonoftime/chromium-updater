@@ -21,10 +21,10 @@ Linux / Windows builds from woolyss.com (not yet supported)
 
 To Dos:
 
-Linux Support
+Linux Support  
 Windows Support ('good builds' from wooolyss.com)
 
 --
 
   
-Design inspired and icons plainly copied from [https://github.com/Hallbin/extension.chromium-updater](https://github.com/Hallbin/extension.chromium-updater)
+Design inspired and icon plainly copied from [https://github.com/Hallbin/extension.chromium-updater](https://github.com/Hallbin/extension.chromium-updater)

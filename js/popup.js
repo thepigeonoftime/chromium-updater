@@ -27,15 +27,16 @@ function init() {
 
 function matchVersion (version, link) {
   if(link) {
-      var update;
+      var update = false;
       current = currentVer.split('.');
       version = version.split('.');
       version.every(function(c,i,a) {
           if (parseFloat(current[i]) > parseFloat(version[i])) {
-            return false;
+            return false; // Break loop when current version segment is higher than 
           }
           else if (parseFloat(current[i]) < parseFloat(version[i])) {
             update = true;
+            return false;
           }
         return true;
         });

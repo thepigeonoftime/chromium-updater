@@ -151,15 +151,15 @@ function matchVersion (channel, version) {
   var current = currentVer.split('.');
   version = version.split('.');
   version.every(function(c,i,a) {
-      if (parseFloat(current[i]) > parseFloat(version[i])) {
-        return false;
-      }
-      else if (parseFloat(current[i]) < parseFloat(version[i])) {
-        update = true;
-      }
-    return true;
-    });
-  
+    if (parseFloat(current[i]) > parseFloat(version[i])) {
+      return false; // Break loop when current > repo version (per segment)
+    }
+    else if (parseFloat(current[i]) < parseFloat(version[i])) {
+      update = true;
+      return false; // Break loop when repo > current version (per segment)
+    }
+  return true;  // continue loop
+  });
   if (channel == 'freesmug' && update) {
     chrome.browserAction.setIcon({path: 'images/update.png'});    
     uuid = (String)(Date.now());
