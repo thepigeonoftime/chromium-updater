@@ -6,7 +6,7 @@ Mac OSX only for the moment
 Linux / Windows support coming up
 
 --
-Safest to install from the [https://chrome.google.com/webstore/detail/chromium-updater/ccgjmadhdidfloacagcnnodbkedkjedg](Chrome Webstore)
+Safest to install from the [Chrome Webstore](https://chrome.google.com/webstore/detail/chromium-updater/ccgjmadhdidfloacagcnnodbkedkjedg)
 
 
 For manual install, go to `chrome://extensions`, turn on Developer Mode at the top, click 'Load unpacked extension' and load the folder contents. Auto Updates won't work when installed this way. 
