@@ -22,7 +22,7 @@ body {
 	/*line-height: 150%;*/
 }
 
-#downloadBtn{
+#websiteBtn, #downloadBtn{
   display: inline-block;
   background:#FAFAFA;
   color:#444;
@@ -37,7 +37,7 @@ body {
   border-radius: 4px;
 }
 
-#downloadBtn:hover {
+#websiteBtn:hover, #downloadBtn:hover {
 	background:#F0F0F0;
 }
 

@@ -2,7 +2,7 @@
 Extension: Chromium Updater
 Description: Check for, download and install the latest Chromium revisions
 Author: Anatol Liebermann
-Version: 0.1.0.3
+Version: 0.1.0.8
 */
 
 
@@ -68,34 +68,49 @@ function getXML(url, callback) {
 }
 
 function getFreesmug(callback) {
-  getXML("http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium", function(error) {
-    if(error) {
-      console.log('Connection Timeout')
-      chrome.runtime.sendMessage({
-        freesmug: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout</span>',
-        url: false
-      });
-    }
-    else {
-     try {
-      var xml = this.responseXML;
-      var link = xml.documentElement.getElementsByTagName("item")[0].getElementsByTagName("link")[0].innerHTML;
-      latestFreesmug = String(link.match("Chromium_OSX_(.+?)\.dmg")).split(",")[1];
-      downloadURL = link;  
+  getXML("https://raw.githubusercontent.com/stullig/chromium-updater/master/_locales/en/versions.txt", function(error) {
+      if (error) {
+        chrome.runtime.sendMessage({
+          stable: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout: ( <a href="https://omahaproxy.appspot.com/all">https://omahaproxy.appspot.com/all</a></span>',
+        });
+      }
+      else {
+        try {
+      // var xml = this.responseXML;
+      // var xml = true;
+      // var html = this.responseText;
+      // var link = String(html.match("http://sourceforge.net/projects/osxportableapps/files/Chromium/Chromium_OSX_([^,]+).dmg/download"));
+      // downloadURL = link.split(",")[0];
+      // latestFreesmug = link.split(",")[1];
+      // resp = this.responseText;
+      // resp = resp.match("mac,stable,([^,]+)");
+      // latestFreesmug = String(resp).split(",")[2];
+      // console.log(link);
+      // var link = xml.documentElement.getElementsByTagName("item")[0].getElementsByTagName("link")[0].innerHTML;
+      // latestFreesmug = String(link.match("Chromium_OSX_(.+?)\.dmg")).split(",")[1];
+      // console.log(latestFreesmug);
+      txt = this.responseText;
+      fsdata = txt.split('\n');
+      latestFreesmug = fsdata[0];
+      downloadURL = fsdata[1];
       if(callback) { 
         matchVersion('freesmug', latestFreesmug);
       }
       else {
         chrome.runtime.sendMessage({
         freesmug: latestFreesmug,
-        url: downloadURL
+        updateURL: downloadURL
       });
       }
     }
     catch(err) {
       console.log(err);
+      var message = "Error parsing XML"
+      if(!xml || !html) {
+        message = "Error connecting to <br> update server <a href='#' id='sforge'>sourceforge.net</a>";
+      }
       chrome.runtime.sendMessage({
-        freesmug: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Error parsing XML</span>',
+        errorMsg: '<div style="position:absolute; left:40%; top:60%; max-height:200px; max-width:400px;"><img width="8" height="8" src="images/problem.png"> <span style="color:red">'+message+'</span></div>',
         url: false
       });
     }
@@ -107,7 +122,7 @@ function getStable(background) {
   getXML("https://omahaproxy.appspot.com/all", function(error) {
       if (error) {
         chrome.runtime.sendMessage({
-          stable: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout</span>',
+          stable: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout: ( <a href="https://omahaproxy.appspot.com/all">https://omahaproxy.appspot.com/all</a></span>',
         });
       }
       else {
