@@ -1,8 +1,8 @@
 ﻿/*
 Extension: Chromium Updater
 Description: Check for, download and install the latest Chromium revisions
-Author: Anatol Liebermann
-Version: 0.1.0.8
+Author: stullig
+Version: 0.1.1.0
 */
 
 
@@ -68,31 +68,21 @@ function getXML(url, callback) {
 }
 
 function getFreesmug(callback) {
-  getXML("https://raw.githubusercontent.com/stullig/chromium-updater/master/_locales/en/versions.txt", function(error) {
-      if (error) {
-        chrome.runtime.sendMessage({
-          stable: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout: ( <a href="https://omahaproxy.appspot.com/all">https://omahaproxy.appspot.com/all</a></span>',
-        });
-      }
-      else {
-        try {
-      // var xml = this.responseXML;
-      // var xml = true;
-      // var html = this.responseText;
-      // var link = String(html.match("http://sourceforge.net/projects/osxportableapps/files/Chromium/Chromium_OSX_([^,]+).dmg/download"));
-      // downloadURL = link.split(",")[0];
-      // latestFreesmug = link.split(",")[1];
-      // resp = this.responseText;
-      // resp = resp.match("mac,stable,([^,]+)");
-      // latestFreesmug = String(resp).split(",")[2];
-      // console.log(link);
-      // var link = xml.documentElement.getElementsByTagName("item")[0].getElementsByTagName("link")[0].innerHTML;
-      // latestFreesmug = String(link.match("Chromium_OSX_(.+?)\.dmg")).split(",")[1];
-      // console.log(latestFreesmug);
-      txt = this.responseText;
-      fsdata = txt.split('\n');
-      latestFreesmug = fsdata[0];
-      downloadURL = fsdata[1];
+  getXML("http://sourceforge.net/projects/osxportableapps/files/Chromium/", function(error) {
+    if(error) {
+      console.log('Connection Timeout')
+      chrome.runtime.sendMessage({
+        errorMsg: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout for: <a href="http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium">http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium</a> </span>',
+        url: false
+      });
+    }
+    else {
+     try {
+      var xml = true;
+      var html = this.responseText;
+      var link = String(html.match("http://sourceforge.net/projects/osxportableapps/files/Chromium/Chromium_OSX_([^,]+).dmg/download"));
+      downloadURL = link.split(",")[0];
+      latestFreesmug = link.split(",")[1];
       if(callback) { 
         matchVersion('freesmug', latestFreesmug);
       }
@@ -117,6 +107,8 @@ function getFreesmug(callback) {
     }
   });
 }
+
+
 
 function getStable(background) {
   getXML("https://omahaproxy.appspot.com/all", function(error) {

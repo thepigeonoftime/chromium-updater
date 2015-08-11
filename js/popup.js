@@ -1,6 +1,6 @@
 var $ = document.getElementById.bind(document);
 var backend = chrome.extension.getBackgroundPage();
-var website = "http://freesmug.org/chromium";
+var website = "https://freesmug.org/chromium";
 var latestStable, latestFreesmug, downloadURL = false;
 var updateStartup, updateHourly, officialStable, stableMismatch;
 var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
@@ -107,6 +107,6 @@ function matchVersion (version, link) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  $('banner').addEventListener('click', function() { window.open("http://www.freesmug.org/chromium") });
+  $('banner').addEventListener('click', function() { window.open("https://www.freesmug.org/chromium") });
   $('options').addEventListener('click', function() { chrome.runtime.openOptionsPage();});
 });

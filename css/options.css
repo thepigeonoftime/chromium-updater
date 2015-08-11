@@ -110,7 +110,7 @@ small {
 
 
 #main {
-  width: 40em;
+  width: 30em;
     padding: 3em;
   margin: 0.5em 0;
   /*margin: 6em auto;*/
@@ -483,11 +483,26 @@ label {
 
 
 #credits {
-  text-align: center;
-  float:bottom;
-  color: #AAA;
+  text-align: right;
+  width: 45em;
+  /*background:#F9F9F9;*/
+  float: bottom;
+  float: right;
+  padding: 3px;
+  font-size:7pt;
+  color: #BBB;
+/*background: #dbdbdb;
+background: -moz-linear-gradient(-45deg,  #dbdbdb 0%, #f2f2f2 58%, #ffffff 100%);
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#dbdbdb), color-stop(58%,#f2f2f2), color-stop(100%,#ffffff));
+background: -webkit-linear-gradient(-45deg,  #dbdbdb 0%,#f2f2f2 58%,#ffffff 100%);
+background: -o-linear-gradient(-45deg,  #dbdbdb 0%,#f2f2f2 58%,#ffffff 100%);
+background: -ms-linear-gradient(-45deg,  #dbdbdb 0%,#f2f2f2 58%,#ffffff 100%);
+background: linear-gradient(135deg,  #dbdbdb 0%,#f2f2f2 58%,#ffffff 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', endColorstr='#ffffff',GradientType=1 );
+*/
 }
 
 #credits a {
- color: #999; 
+ color: #777;
+ font-size: 7pt; 
 }

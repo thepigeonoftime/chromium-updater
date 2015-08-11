@@ -15,9 +15,9 @@ For manual install, go to `chrome://extensions`, turn on Developer Mode at the t
 Mac builds from FreeSMUG.org,  
 Linux / Windows builds from woolyss.com (not yet supported)
 
-![Screenshot 1](http://anony.ws/i/2015/06/02/popup.png)
+![Screenshot 1](https://anony.ws/i/2015/06/02/popup.png)
 
-![Screenshot 2](http://anony.ws/i/2015/06/02/richnote34081.png)  
+![Screenshot 2](https://anony.ws/i/2015/06/02/richnote34081.png)  
 
 To Dos:
 
