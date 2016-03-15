@@ -68,21 +68,26 @@ function getXML(url, callback) {
 }
 
 function getFreesmug(callback) {
-  getXML("http://sourceforge.net/projects/osxportableapps/files/Chromium/", function(error) {
+  var checkURL = "http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium";
+  getXML(checkURL, function(error) {
     if(error) {
       console.log('Connection Timeout')
       chrome.runtime.sendMessage({
-        errorMsg: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout for: <a href="http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium">http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium</a> </span>',
+        errorMsg: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout for: <a href="' + checkURL + '">' + checkURL + '</a> </span>',
         url: false
       });
     }
     else {
      try {
-      var xml = true;
-      var html = this.responseText;
-      var link = String(html.match("http://sourceforge.net/projects/osxportableapps/files/Chromium/Chromium_OSX_([^,]+).dmg/download"));
-      downloadURL = link.split(",")[0];
-      latestFreesmug = link.split(",")[1];
+      var xml = this.responseXML;
+      var link = xml.documentElement.getElementsByTagName("item")[0].getElementsByTagName("link")[0].innerHTML;
+      var matches = link.match("https?://sourceforge.net/projects/osxportableapps/files/Chromium/Chromium_OSX_([^,<]+).dmg/download");
+      if(matches.length >= 1) {
+        downloadURL = String(matches[0])
+      }
+      if(matches.length >= 2) {
+        latestFreesmug = String(matches[1])
+      }
       if(callback) { 
         matchVersion('freesmug', latestFreesmug);
       }
@@ -96,7 +101,7 @@ function getFreesmug(callback) {
     catch(err) {
       console.log(err);
       var message = "Error parsing XML"
-      if(!xml || !html) {
+      if(!xml) {
         message = "Error connecting to <br> update server <a href='#' id='sforge'>sourceforge.net</a>";
       }
       chrome.runtime.sendMessage({
