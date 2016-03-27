@@ -36,7 +36,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 
 function init() {
   if (updateHourly) {
-    hourlyUpdate();  
+    hourlyUpdate();
   }
   if (updateStartup) {
     getFreesmug(true);
@@ -68,11 +68,11 @@ function getXML(url, callback) {
 }
 
 function getFreesmug(callback) {
-  getXML("http://sourceforge.net/projects/osxportableapps/files/Chromium/", function(error) {
+  getXML("https://sourceforge.net/projects/osxportableapps/files/Chromium/", function(error) {
     if(error) {
       console.log('Connection Timeout')
       chrome.runtime.sendMessage({
-        errorMsg: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout for: <a href="http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium">http://sourceforge.net/projects/osxportableapps/rss?path=/Chromium</a> </span>',
+        errorMsg: '<img width="8" height="8" src="images/problem.png"> <span style="color:red">Connection Timeout for: <a href="https://sourceforge.net/projects/osxportableapps/rss?path=/Chromium">https://sourceforge.net/projects/osxportableapps/rss?path=/Chromium</a> </span>',
         url: false
       });
     }
@@ -80,10 +80,10 @@ function getFreesmug(callback) {
      try {
       var xml = true;
       var html = this.responseText;
-      var link = String(html.match("http://sourceforge.net/projects/osxportableapps/files/Chromium/Chromium_OSX_([^,]+).dmg/download"));
+      var link = String(html.match("https://sourceforge.net/projects/osxportableapps/files/Chromium/Chromium_OSX_([^,]+).dmg/download"));
       downloadURL = link.split(",")[0];
       latestFreesmug = link.split(",")[1];
-      if(callback) { 
+      if(callback) {
         matchVersion('freesmug', latestFreesmug);
       }
       else {
@@ -139,8 +139,8 @@ function getStable(background) {
 }
 
 
-function hourlyUpdate() { 
-  if(updateHourly) { 
+function hourlyUpdate() {
+  if(updateHourly) {
     setTimeout(function() {
       getFreesmug(true); hourlyUpdate()
     }, 3600000);
@@ -150,7 +150,7 @@ function hourlyUpdate() {
     }, 3600000)
     }
   }
-}; 
+};
 
 function matchVersion (channel, version) {
   var uuid, message, button, buttonIcon, url;
@@ -168,7 +168,7 @@ function matchVersion (channel, version) {
   return true;  // continue loop
   });
   if (channel == 'freesmug' && update) {
-    chrome.browserAction.setIcon({path: 'images/update.png'});    
+    chrome.browserAction.setIcon({path: 'images/update.png'});
     uuid = (String)(Date.now());
     icon = 'images/popup.png';
     title = 'A new version of Chromium is available.';
@@ -195,18 +195,18 @@ function matchVersion (channel, version) {
 }
 
 function notify(uuid, icon, title, message, button, buttonIcon, url, button2) {
-  richNote = { type: 'basic', iconUrl: icon, title: title, message: message, buttons: [{ title: button, iconUrl: buttonIcon}], isClickable: true } 
-  if (button2) { 
+  richNote = { type: 'basic', iconUrl: icon, title: title, message: message, buttons: [{ title: button, iconUrl: buttonIcon}], isClickable: true }
+  if (button2) {
     richNote.buttons.push({title: "Go to FreeSMUG", iconUrl: "images/arrow.png"});
   }
   var link = function (notificationId, buttonIndex) {
-    url = (buttonIndex > 0) ? 'http://www.freesmug.org/chromium' : url;
+    url = (buttonIndex > 0) ? 'https://www.freesmug.org/chromium' : url;
     window.open(url);
   };
   chrome.notifications.create(uuid, richNote);
   chrome.notifications.onButtonClicked.addListener(function (notificationId, buttonIndex) {
     if(uuid == notificationId) {
-      url = (buttonIndex > 0) ? 'http://www.freesmug.org/chromium' : url;
+      url = (buttonIndex > 0) ? 'https://www.freesmug.org/chromium' : url;
       window.open(url);
     }
   });
