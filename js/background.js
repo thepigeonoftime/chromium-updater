@@ -10,6 +10,7 @@ var $ = document.getElementById.bind(document);
 var latestStable, latestFreesmug, downloadURL;
 var updateStartup, updateHourly, officialStable, stableMismatch;
 var currentVer = window.navigator.userAgent.match(/Chrome\/([\d.]+)/)[1];
+var haveNotified = false;
 
 chrome.storage.sync.get(['updateStartup', 'updateHourly', 'officialStable', 'stableMismatch'], function(items)
   {
@@ -146,6 +147,7 @@ function getStable(background) {
 
 function hourlyUpdate() { 
   if(updateHourly) { 
+    haveNotified = false;
     setTimeout(function() {
       getFreesmug(true); hourlyUpdate()
     }, 3600000);
@@ -200,6 +202,10 @@ function matchVersion (channel, version) {
 }
 
 function notify(uuid, icon, title, message, button, buttonIcon, url, button2) {
+  if (haveNotified) {
+    return;
+  }
+  haveNotified = true;
   richNote = { type: 'basic', iconUrl: icon, title: title, message: message, buttons: [{ title: button, iconUrl: buttonIcon}], isClickable: true } 
   if (button2) { 
     richNote.buttons.push({title: "Go to FreeSMUG", iconUrl: "images/arrow.png"});

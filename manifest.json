@@ -27,5 +27,5 @@
    "permissions": [ "storage", "notifications", "http://sourceforge.net/projects/osxportableapps/*", "https://sourceforge.net/projects/osxportableapps/*", "https://omahaproxy.appspot.com/*" ],
    "short_name": "Chromium Updater",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.1.1.1"
+   "version": "0.1.1.2"
 }
