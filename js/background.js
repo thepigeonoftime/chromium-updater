@@ -2,7 +2,7 @@
 Extension: Chromium Updater
 Description: Check for, download and install the latest Chromium revisions
 Author: stullig
-Version: 0.1.1.2
+Version: 0.1.1.4
 */
 
 
