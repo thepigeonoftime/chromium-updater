@@ -1,24 +1,29 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="https://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Chromium Updater</title><link rel="stylesheet" href="css/popup.css" type="text/css" /><style type="text/css">body {width:340px;}</style><script type="text/javascript" src="js/popup.js"></script></head>
+﻿<!doctype html>
+<html lang="en-UK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Chromium Updater Chrome Extension">
+<meta name="keywords" content="Chromium-Updater, Chrome-Extension">
+<meta name="author" content="Daniel Giversen">
+<!-- PAGE settings -->
+<title>Chromium Updater Chrome Extension</title>
+<link rel="stylesheet" href="popup.css" type="text/css" />
+<script type="text/javascript" src="popup.js"></script>
+</head>
 <body>
-    <div id="box1">
-      <a href="#" id="banner"><img src="images/banner.png" width="133" height="32"/></a>
-      <div class="spacer"></div>
-      <div class="wrap"><div class="label">Installed Version: &nbsp;</div><div class="versionLabel"><div id="installedLabel"></div></div></div>
-      <div class="wrap"><div class="label">Latest FreeSMUG Build: &nbsp;</div><img id="loadingFreesmug" src="images/dots.gif" alt="" /><div class="versionLabel"><div id="freesmugVersion"></div></div></div></div>
-      <div class="spacer"></div>
-      <div class="wrap" id="stable"><div class="stableLabel">Latest Chromium Stable: &nbsp;<br><div id="calendar">(see <a href="#">Release Calendar</a>)</div></div><img id="loadingStable" src="images/dots.gif" alt="" /><div class="versionLabel"><div id="stableVersion"></div></div></div>
-      <div class="spacer"></div>
-      <a id="options" href="#"><img src="images/cog.png"></a>
-      <div class="spacer"></div>
-      <div id="updateMsg"></div>
-      <div id="download"><br>
-        <form id="form" name="form" method="post" action="">
-          <div align="right">
-            <div class="spacer"></div>
-            <input type="submit" name="button1" id="websiteBtn" value="Visit Website"/>
-            <input type="submit" name="button2" id="downloadBtn" value="Download Update"/>
-          </div>
-        </form></div>
+  <div id="box1">
+    <div><form id="form" name="form" method="post" action="">
+      <div align="right">
+        <input type="submit" name="button2" id="downloadBtn" value="Download and update!" disabled="disabled"/>
       </div>
-    
-</body></html>
+    </form></div>
+    <div class="Uv uY a-f-e Qea"><img src="Banner.png" width="146" height="32" /></div>
+      <p><span class="hint_message" id="hint_message_text0">INSTALLED VERSION: </span></p>
+      <p><span class="hint_message" id="hint_message_text2">INSTALLED BUILD: </span></p>
+      <p><span class="hint_message" id="hint_message_text1">LATEST BUILD: </span></p>
+      <p align="right"><span class="hint_message" id="hint_message_text3"></span></p>
+    </div>
+    <div id="box2"> </div>
+</body>
+</html>
