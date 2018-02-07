@@ -1,8 +1,8 @@
 {
    "Desc": {
-      "message": "Check for, download and install the latest stable Chromium revisions"
+      "message": "Check, download and install latest Chromium builds within your web browser!"
    },
    "Name": {
-      "message": "FreeSMUG Updater for Chromium (Mac)"
+      "message": "Chromium Updater"
    }
 }
